@@ -69,6 +69,8 @@
     <Compile Include="Models\Customers.cs" />
     <Compile Include="Models\CustomerSpectypes.cs" />
     <Compile Include="Models\MaterialCustomers.cs" />
+    <Compile Include="Models\MaterialExportRequest.cs" />
+    <Compile Include="Models\MaterialExportResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CustomerLogRepository.cs" />
@@ -77,6 +79,8 @@
     <Compile Include="Repository\CustomerSpectypeRepository.cs" />
     <Compile Include="Repository\MaterialCustomerLogRepository.cs" />
     <Compile Include="Repository\MaterialCustomerRepository.cs" />
+    <Compile Include="Repository\MaterialRepository.cs" />
+    <Compile Include="Repository\TraceOneMaterialRepository.cs" />
     <Compile Include="Samples\Sample.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,7 @@ namespace Config
         public static string EpContacts => Get("EP_CONTACTS");
         public static string EpMaterialCustomers => Get("EP_MATCUSTOMERS");
         public static string EpCustomerSpectypes => Get("EP_CUSTOMER_SPECTYPES");
-
+        public static string EpExportMaterials => Get("EP_EXPORT_MATERIALS");
         private static string Get(string key)
         {
             var v = ConfigurationManager.AppSettings[key];

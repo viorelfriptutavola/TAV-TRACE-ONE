@@ -5,6 +5,7 @@ using Models;
 using Samples;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using TAV_TRACE_ONE.Models;
@@ -70,6 +71,12 @@ namespace TraceOneConsole47
                         RunSpectypes(api);
 
                         RunMaterials(api);
+
+                        break;
+
+                    case "exportmaterials":
+
+                        ExportMaterials(api);
 
                         break;
 
@@ -536,6 +543,146 @@ namespace TraceOneConsole47
                 Console.WriteLine(ex.Message);
             }
         }
+
+
+        //export materials
+        private static MaterialExportRequest BuildExportRequest(List<MaterialExportItemDto> items)
+        {
+            return new MaterialExportRequest
+            {
+                Plants =
+                    items
+                        .Select(x => x.Plant)
+                        .ToList(),
+
+                Codes =
+                    items
+                        .Select(x => x.Code)
+                        .ToList(),
+
+                IncludeAttributes = true,
+
+                IncludeNames = true,
+
+                IncludeEaNs = true,
+
+                IncludeCosts = true,
+
+                IncludeGhgsClassifications = true,
+
+                IncludeVendors = true,
+
+                IncludeUfSets = true,
+
+                IncludeUfAttributes = true,
+
+                IncludeCustomers = true,
+
+                Attributes =
+                    new List<string>()
+            };
+        }
+        private static void ExportMaterials(TraceOneClient api)
+        {
+            var repo =
+                new MaterialRepository(
+                    AppSettings.ConnectionString
+                );
+
+            List<MaterialExportItemDto> items =
+                repo.GetMaterialsToExport();
+
+            //items.Add(new MaterialExportItemDto
+            //{
+            //    Code = "RM000095",
+            //    Plant = "MAIN"
+            //});
+            //items.Add(new MaterialExportItemDto
+            //{
+            //    Code = "RM000034",
+            //    Plant = "MAIN"
+            //});
+
+            Console.WriteLine(
+                $"Materiali trovati: {items.Count}"
+            );
+
+            if (items.Count == 0)
+            {
+                Console.WriteLine(
+                    "Nessun materiale trovato."
+                );
+
+                return;
+            }
+
+            var request =
+                BuildExportRequest(items);
+
+            PrintJson(
+                "EXPORT MATERIALS REQUEST",
+                request
+            );
+
+            ApiResult result =
+                api.ExportMaterialsAsync(request)
+                    .GetAwaiter()
+                    .GetResult();
+
+            Console.WriteLine(
+                $"HTTP: {result.StatusCode}"
+            );
+
+            Console.WriteLine(
+                result.ResponseBody
+            );
+
+            if (!result.BusinessSuccess)
+            {
+                Console.WriteLine(
+                    "Errore business."
+                );
+
+                return;
+            }
+
+            var response =
+                Newtonsoft.Json.JsonConvert
+                    .DeserializeObject<
+                        MaterialExportResponse>(
+                            result.ResponseBody
+                        );
+
+            if (
+                response == null
+                ||
+                response.Materials == null
+                ||
+                response.Materials.Count == 0
+            )
+            {
+                Console.WriteLine(
+                    "Nessun materiale restituito."
+                );
+
+                return;
+            }
+
+            var saveRepo =
+                new TraceOneMaterialRepository(
+                    AppSettings.ConnectionString
+                );
+
+            saveRepo.SaveMaterials(response);
+
+            Console.WriteLine(
+                $"Materiali salvati: " +
+                response.Materials.Count
+            );
+        }
+
+        
+
     }
     
 }

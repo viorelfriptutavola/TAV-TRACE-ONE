@@ -153,5 +153,14 @@ namespace Http
                 AppSettings.EpCustomerSpectypes,
                 data
             );
+
+
+        public Task<ApiResult>
+    ExportMaterialsAsync(
+        MaterialExportRequest data)
+    => PostJsonAsync(
+    AppSettings.EpExportMaterials,
+    data
+);
     }
 }
