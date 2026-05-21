@@ -1,11 +1,18 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace Config
 {
     public static class AppSettings
     {
         public static string ClientId => Get("TRACEONE_CLIENT_ID");
-        public static string ClientSecret => Get("TRACEONE_CLIENT_SECRET");
+        //public static string ClientSecret => Get("TRACEONE_CLIENT_SECRET");
+        public static string ClientSecret =>
+          Environment.GetEnvironmentVariable("TRACEONE_CLIENT_SECRET");
+
+        public static string ConnectionString =>
+            Environment.GetEnvironmentVariable("SQL_WEBAPP_DB");
+
         public static string Tenant => Get("TRACEONE_TENANT");
 
         public static string TokenUrl => Get("TRACEONE_TOKEN_URL");
