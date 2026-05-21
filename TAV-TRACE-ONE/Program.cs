@@ -59,11 +59,11 @@ namespace TraceOneConsole47
                 //Console.WriteLine("Invio Customers...");
                 //Console.WriteLine(api.SendCustomersAsync(customers).GetAwaiter().GetResult()); Console.WriteLine();
 
-                Console.WriteLine("Invio Customer SpecTypes...");
-                Console.WriteLine(api.SendCustomerSpectypesAsync(spectypes).GetAwaiter().GetResult()); Console.WriteLine();
+                //Console.WriteLine("Invio Customer SpecTypes...");
+                //Console.WriteLine(api.SendCustomerSpectypesAsync(spectypes).GetAwaiter().GetResult()); Console.WriteLine();
 
-                //Console.WriteLine("Invio Material Customers...");
-                //Console.WriteLine(api.SendMaterialCustomersAsync(matcusts).GetAwaiter().GetResult()); Console.WriteLine();
+                Console.WriteLine("Invio Material Customers...");
+                Console.WriteLine(api.SendMaterialCustomersAsync(matcusts).GetAwaiter().GetResult()); Console.WriteLine();
                 //500
 
 

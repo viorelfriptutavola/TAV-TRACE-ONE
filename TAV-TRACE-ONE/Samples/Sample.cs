@@ -105,7 +105,7 @@ namespace Samples
                         Action = "Create",
                         RqstId = Guid.NewGuid().ToString(),
                         Plant = "MAIN",
-                        Matcode = "188566",
+                        Matcode = "188208-2601",
                         CustomerCode = "296221",
                         CustomerSubcode = "NONE",
                         SoldDate = DateTime.Today.ToString("yyyy-MM-dd"),
