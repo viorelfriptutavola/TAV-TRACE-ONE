@@ -42,6 +42,7 @@ namespace TAV_TRACE_ONE.Repository
                     Brand,
                     OrderNumber
                 FROM CQ.dbo.TraceOne_MatCust_DaInviare
+                where Action='Create' and [art_trace]!=null
 
                 ";
 
