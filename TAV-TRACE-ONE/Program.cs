@@ -16,6 +16,46 @@ namespace TraceOneConsole47
 {
     class Program
     {
+
+        /*
+         * PARAMETRI DISPONIBILI
+         *
+         * customers
+         *   Esegue il processo RunCustomers()
+         *   Vista utilizzata:
+         *     - TraceOne_Customer_DaInviare
+         *
+         * spectypes
+         *   Esegue il processo RunSpectypes()
+         *   Vista utilizzata:
+         *     - TraceOne_Spectype_DaInviare
+         *
+         * materials
+         *   Esegue il processo RunMaterials()
+         *   Vista utilizzata:
+         *     - TraceOne_Materials_DaInviare
+         *
+         * exportmaterials
+         *   Esegue il processo ExportMaterials()
+         *   Vista utilizzata:
+         *     - TraceOne_MatCust_DaInviare
+         *
+         * all
+         *   Esegue in sequenza:
+         *     1. RunCustomers()
+         *     2. RunSpectypes()
+         *     3. RunMaterials()
+         *
+         * Esempi:
+         *
+         * TraceOne.exe customers
+         * TraceOne.exe spectypes
+         * TraceOne.exe materials
+         * TraceOne.exe exportmaterials
+         * TraceOne.exe all
+         */
+
+
         static void Main(string[] args)
         {
             ServicePointManager.SecurityProtocol =
